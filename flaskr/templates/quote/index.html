@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block main %}
+
+<main class="container-index">
+
+  <table class="table-index">
+      <thead>
+          <tr>
+              <th>Symbol</th>
+              <th>Name</th>
+              <th>Price (USD)</th>
+              <th>Date/Time</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for h in history %}
+              <tr>
+                  <td>{{ h.sym }}</td>
+                  <td>{{ h.nm }}</td>
+                  <td>{{ h.prc }}$</td>
+                  <td>{{ h.created }}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  <form action="del" method="post">
+    <button class="btn" type="submit">Delete all</button>
+  </form>
+</main>
+
+
+{% endblock %}
