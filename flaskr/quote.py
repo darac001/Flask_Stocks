@@ -43,28 +43,42 @@ def index():
 @bp.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
+    error = None
     """Get stock quote."""
     if request.method == "POST":
         symbol = request.form.get("symbol")
-        error = None
-        qt = lookup(symbol)  
+        db = get_db()
+        
 
         # Ensure symbol was submited
         if not symbol:
             error = 'Must provide ticker'
-        if qt is None:
-            error = 'Incorrect ticker'
         # insert into database
-        insert = """INSERT INTO stocks (stk_id, sym, nm, prc) VALUES (?, ?, ?, ?)"""
-        data_tuple = (g.user['id'], qt["symbol"], qt["name"], qt["price"])
-        
-        db = get_db()
-        db.execute(insert, data_tuple)
-        db.commit()   
-        return render_template("quote/quoted.html", qt=qt)
+        # qt = lookup(symbol)  
+        # print(qt)
+        # if qt is None:
+        #     error = 'Must provide ticker'
+        #     flash("Incorrect ticker symbol") 
 
-    else:
-        return render_template("quote/quote.html")
+        else:
+            try:
+                qt = lookup(symbol)  
+                
+                insert = """INSERT INTO stocks (stk_id, sym, nm, prc) VALUES (?, ?, ?, ?)"""
+                data_tuple = (g.user['id'], qt["symbol"], qt["name"], qt["price"])
+                
+                
+                db.execute(insert, data_tuple)
+                db.commit()  
+            except ValueError:
+                error = f"Incorrect ticker symbol"
+            else:
+                return render_template("quote/quoted.html", qt=qt)
+
+        flash(error) 
+        
+
+    return render_template("quote/quote.html", error=error)
     
 
 
