@@ -67,27 +67,13 @@ $ flask --app flaskr --debug run
 
 #### Project Directory:
 /home/user/Projects/FLASK_BLOG
-├── flaskr/
-│   ├── __init__.py
-│   ├── db.py
-│   ├── schema.sql
-│   ├── auth.py
-│   ├── blog.py
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── auth/
-│   │   │   ├── login.html
-│   │   │   └── register.html
-│   │   └── quote/
-│   │       ├── quote.html
-│   │       ├── index.html
-│   │       └── quoted.html
-│   └── static/
-│   │    |── style.css
-│   │    └── img/│   │         
-│   │         └── logo-no-background.png
-│   │       
-├── venv/
-├── setup.py
-└── MANIFEST.in
-└── README.md
+├───flaskr
+│   ├───static
+│   │   └───img
+│   ├───templates
+│   │   ├───auth
+│   │   └───quote
+│   └───__pycache__
+├───instance
+└───venv
+    
