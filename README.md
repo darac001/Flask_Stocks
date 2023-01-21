@@ -66,6 +66,7 @@ Run in development server
 $ flask --app flaskr --debug run
 
 #### Project Directory:
+```
 /home/user/Projects/FLASK_BLOG
 ├───flaskr
 │   ├───static
@@ -76,4 +77,4 @@ $ flask --app flaskr --debug run
 │   └───__pycache__
 ├───instance
 └───venv
-    
+```
